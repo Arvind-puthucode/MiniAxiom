@@ -1,6 +1,7 @@
 # Motivation
-Want to understand how formal proof engines like **COQ** work and how to use llm to convert natural language queries to questions that such systems are conformtable with.
-A lot of work is in an inspiration what Symbolica and George Morgan works on and the aim is eventually understand some amount of what they do.
+I'm interested in understanding how formal proof engines like Coq work, and how large language models (LLMs) can be used to translate natural language queries into formal representations that such systems can process.
+
+This project is inspired by the work of Symbolica and George Morgan, with the long-term goal of grasping and contributing to the kind of reasoning systems they’re building.
 
 # MathGraph: Hybrid Mathematical Reasoning System
 
