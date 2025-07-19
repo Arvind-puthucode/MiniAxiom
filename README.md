@@ -34,7 +34,6 @@ Human-Readable Proof
 - **🔗 Rule System**: 25+ mathematical rules across algebra, arithmetic, and number theory
 - **⚡ Forward Chaining**: Systematic proof search with termination guarantees
 - **🌐 Web Interface**: Streamlit-based interactive demo
-- **📈 Performance Tracking**: Comprehensive statistics and health monitoring
 
 ### 🎯 Problem Types Supported
 
@@ -132,24 +131,6 @@ uv run python demo_llm_integration.py
 
 # Complete system demo
 uv run python demo_complete_system.py
-```
-
-## 🧪 Testing
-
-Run the comprehensive test suite:
-
-```bash
-# All tests
-uv run pytest
-
-# Specific test categories
-uv run pytest tests/test_expressions.py     # Core data structures
-uv run pytest tests/test_parser.py          # Expression parsing
-uv run pytest tests/test_pattern_matching.py # Pattern matching
-uv run pytest tests/test_rules.py          # Rule system
-uv run pytest tests/test_proof_engine.py   # Proof engine
-uv run pytest tests/test_llm_integration.py # LLM integration
-uv run pytest tests/test_end_to_end.py     # End-to-end tests
 ```
 
 
