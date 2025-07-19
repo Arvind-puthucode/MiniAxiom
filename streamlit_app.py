@@ -8,6 +8,36 @@ import time
 
 # Import the MathGraph system
 from src.mathgraph import MathReasoningSystem, MathGraphAPI
+import re
+
+
+def display_mathematical_explanation_properly(explanation: str):
+    """
+    Display mathematical explanations with proper inline LaTeX rendering.
+    
+    Uses the approach: st.write(f"Text with ${math}$ more text") 
+    to maintain natural text flow while rendering math correctly.
+    """
+    if not explanation:
+        return
+    
+    # Split explanation into paragraphs for better formatting
+    paragraphs = explanation.split('\n\n')
+    
+    for paragraph in paragraphs:
+        paragraph = paragraph.strip()
+        if not paragraph:
+            continue
+            
+        # Check if this is a display math block (starts and ends with $$)
+        if paragraph.startswith('$$') and paragraph.endswith('$$'):
+            # Display math - use st.latex
+            math_content = paragraph[2:-2].strip()
+            st.latex(math_content)
+        else:
+            # Regular paragraph with potential inline math
+            # Use st.write with the inline LaTeX approach
+            st.write(paragraph)
 
 
 def initialize_session_state():
@@ -53,6 +83,15 @@ def display_sidebar():
                 "If x + 5 = 12, find x",
                 "If 3y = 21, what is y?",
                 "If 2z - 4 = 10, find z"
+            ],
+            "Algebraic Identities": [
+                "(a^n + b^n)(a^n - b^n) = a^(2n) - b^(2n)",
+                "(x + y)^2 = x^2 + 2xy + y^2",
+                "(a + b)(a - b) = a^2 - b^2"
+            ],
+            "Polynomial Theory": [
+                "If a polynomial f(x) is divided by x−a, the remainder is f(a)",
+                "If p(x) = x^2 + 3x + 2 and x = -1, find p(-1)"
             ],
             "Number Theory": [
                 "If n is even, prove that 2n is even",
@@ -208,7 +247,7 @@ def display_results():
     # Problem Analysis
     if st.session_state.config["show_analysis"] and response.analysis:
         st.subheader("🔍 Problem Analysis")
-        st.markdown(response.analysis)
+        display_mathematical_explanation_properly(response.analysis)
     
     # Formal Representation
     if st.session_state.config["show_formal"] and response.formal_problem:
@@ -241,8 +280,10 @@ def display_results():
                 st.markdown(f"**Rule:** {step.rule_applied.name}")
     
     # Natural Language Explanation
-    st.subheader("📝 Explanation")
-    st.markdown(response.explanation)
+    st.subheader("📝 Mathematical Explanation")
+    
+    # Enhanced explanation display with proper LaTeX rendering
+    display_mathematical_explanation_properly(response.explanation)
     
     # Additional details in expander
     with st.expander("🔧 Technical Details"):

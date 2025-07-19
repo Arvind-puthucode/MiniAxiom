@@ -27,10 +27,16 @@ Formal Proof Steps:
 REQUIREMENTS:
 1. Write for high school to early college level understanding
 2. Explain the logical reasoning at each step clearly
-3. Use proper mathematical terminology
+3. Use proper mathematical terminology with STREAMLIT-COMPATIBLE LaTeX
 4. Show the connection between steps
 5. Make it educational and engaging
 6. End with a clear conclusion statement
+
+MATHEMATICAL FORMATTING:
+- Use $math$ for inline mathematical expressions (e.g., $f(x)$, $x = 5$, $a^2 + b^2$)
+- Use $$math$$ for display mathematical expressions (e.g., $$f(x) = ax^2 + bx + c$$)
+- Never use \\( \\) or \\[ \\] or ( ) or [ ] for math - only $ and $$
+- Examples: $f(x)$, $x - a$, $f(a)$, $$f(x) = (x - a) \\cdot q(x) + r$$
 
 STRUCTURE:
 - Start with "To solve this problem..."
@@ -219,13 +225,18 @@ Available Rules: {[r.name for r in problem.rules]}
 Problem Type: {problem.metadata.get('problem_type', 'unknown')}
 Validation Status: {'Valid' if validation_results['is_valid'] else 'Has issues'}
 
-Provide a brief analysis covering:
-1. What type of mathematical problem this is
-2. What approach would be needed to solve it
-3. What the expected outcome should be
-4. Any potential challenges or considerations
+MATHEMATICAL FORMATTING:
+- Use $math$ for inline mathematical expressions (e.g., $x = 5$, $f(x)$, $a^2 + b^2$)
+- Use $$math$$ for display mathematical expressions when showing equations
+- Examples: $x + 5 = 12$, $f(x)$, $$x = \\frac{{-b \\pm \\sqrt{{b^2 - 4ac}}}}{{2a}}$$
 
-Keep it concise but informative.
+Provide a brief analysis covering:
+1. **Problem Classification**: What type of mathematical problem this is
+2. **Solution Strategy**: What approach would be needed to solve it  
+3. **Expected Outcome**: What the expected result should be
+4. **Potential Challenges or Considerations**: Any difficulties or edge cases
+
+Keep it concise but informative. Use proper mathematical notation throughout.
 """
         
         try:
