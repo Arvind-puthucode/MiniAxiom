@@ -1,0 +1,22 @@
+[project]
+name = "miniaxiom"
+version = "0.1.0"
+description = "MathGraph: Hybrid Mathematical Reasoning System"
+authors = [
+    { name = "Arvind", email = "arvind@example.com" }
+]
+requires-python = ">=3.11"
+
+dependencies = [
+    "openai>=1.0.0", # Azure OpenAI API integration
+    "sympy>=1.12", # Mathematical expression handling
+    "streamlit>=1.28.0", # Web framework for UI
+    "networkx>=3.2", # Proof graph representation
+    "pytest>=7.4.0", # Testing framework
+    "python-dotenv>=1.0.0", # Environment variable management
+    "pydantic>=2.5.0", # Data validation and parsing
+    "ruff>=0.12.4",
+]
+
+[tool.uv]
+# Optional: uv-specific config (currently minimal support)
