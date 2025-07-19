@@ -222,18 +222,18 @@ The system successfully demonstrates:
 
 ## 🔄 Future Extensions
 
-### Immediate (1-2 weeks)
+### Easier TODOS
 - **Backward Chaining**: Goal-directed proof search
 - **Rule Learning**: Extract patterns from successful proofs
 - **Multi-step Algebra**: More complex equation solving
 
-### Medium-term (1-3 months)
+### Medium TODOS
 - **Higher-order Logic**: Quantifiers and functions
 - **Geometric Reasoning**: Basic geometric predicates
 - **Calculus Integration**: Derivatives and limits
 - **Group Theory**: Convert generic theorems to group theory problems
 
-### Long-term (6+ months)
+### Harder TODOs (Dream lol)
 - **Educational Platform**: Interactive tutoring system
 - **Research Tool**: Mathematician proof assistance
 - **Automated Grading**: Homework evaluation
@@ -266,8 +266,8 @@ MiniAxiom/
 
 ## 🤝 Contributing
 
-This is a research prototype demonstrating hybrid AI mathematical reasoning. The codebase provides a solid foundation for:
-
+This is my vibecoding and experimenting this prototype demonstrating hybrid AI mathematical reasoning. Eventually this needs to be formalized for hypergraphss.
+Where can we use this?
 - **Educational Tools**: Interactive math tutoring
 - **Research Platforms**: Formal reasoning experiments  
 - **Production Systems**: Automated mathematical problem solving
