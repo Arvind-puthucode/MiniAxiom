@@ -1,3 +1,7 @@
+# Motivation
+Want to understand how formal proof engines like **COQ** work and how to use llm to convert natural language queries to questions that such systems are conformtable with.
+A lot of work is in an inspiration what Symbolica and George Morgan works on and the aim is eventually understand some amount of what they do.
+
 # MathGraph: Hybrid Mathematical Reasoning System
 
 A novel hybrid approach to mathematical problem solving that combines Large Language Models (LLMs) with formal reasoning engines to achieve both natural language understanding and mathematical rigor.
@@ -148,7 +152,6 @@ uv run pytest tests/test_llm_integration.py # LLM integration
 uv run pytest tests/test_end_to_end.py     # End-to-end tests
 ```
 
-**Test Coverage**: 65+ tests across all components with 100% success rate.
 
 ## 📊 Performance Metrics
 
@@ -301,4 +304,3 @@ This is a research prototype demonstrating hybrid AI mathematical reasoning. The
 
 **MathGraph v1.0** - Demonstrating the future of AI mathematics through hybrid LLM + formal reasoning approaches.
 
-*For Axiom Math: This prototype showcases deep understanding of automated mathematical reasoning challenges and provides a concrete foundation for production-scale systems.*

@@ -35,6 +35,7 @@ class ExpressionParser:
             "x" -> Variable("x")
             "x + 3" -> Operation(Variable("x"), "+", Number(3))
             "2 * (x - 1)" -> Operation(Number(2), "*", Operation(Variable("x"), "-", Number(1)))
+            "a^(2n)" -> Operation(Variable("a"), "^", Operation(Number(2), "*", Variable("n")))
         """
         try:
             # Clean the input string
@@ -42,14 +43,62 @@ class ExpressionParser:
             if not expr_str:
                 raise ValueError("Empty expression")
             
+            # Preprocess the expression for SymPy compatibility
+            processed_expr = self._preprocess_expression(expr_str)
+            
             # Use SymPy to parse, but prevent automatic simplification
-            sympy_expr = sp.sympify(expr_str, evaluate=False)
+            sympy_expr = sp.sympify(processed_expr, evaluate=False)
             
             # Convert SymPy expression to our internal representation
             return self._sympy_to_expression(sympy_expr)
             
         except Exception as e:
             raise ValueError(f"Failed to parse expression '{expr_str}': {str(e)}")
+    
+    def _preprocess_expression(self, expr_str: str) -> str:
+        """
+        Preprocess expression string for SymPy compatibility.
+        
+        Handles:
+        - Converting ^ to ** for exponentiation
+        - Adding implicit multiplication for expressions like (2n) -> (2*n)
+        - Fixing parentheses in exponents like a^(2n) -> a**(2*n)
+        """
+        import re
+        
+        # First, replace ^ with ** for SymPy
+        processed = expr_str.replace('^', '**')
+        
+        # Handle implicit multiplication in parentheses like (2n) -> (2*n)
+        # This regex finds patterns like (digit+letters) or (letter+digit)
+        def fix_implicit_mult(match):
+            content = match.group(1)
+            # Add * between digits and letters
+            fixed = re.sub(r'(\d)([a-zA-Z])', r'\1*\2', content)
+            # Add * between letters and digits
+            fixed = re.sub(r'([a-zA-Z])(\d)', r'\1*\2', fixed)
+            # Handle consecutive variables like xy -> x*y
+            fixed = re.sub(r'([a-zA-Z])([a-zA-Z])', r'\1*\2', fixed)
+            return f'({fixed})'
+        
+        # Apply the fix to parenthesized expressions
+        processed = re.sub(r'\(([^)]+)\)', fix_implicit_mult, processed)
+        
+        # Handle implicit multiplication outside parentheses too
+        # For cases like 2n -> 2*n
+        processed = re.sub(r'(\d)([a-zA-Z])', r'\1*\2', processed)
+        processed = re.sub(r'([a-zA-Z])(\d)', r'\1*\2', processed)
+        
+        # Handle implicit multiplication between parentheses like (a+b)(c+d) -> (a+b)*(c+d)
+        processed = re.sub(r'\)\s*\(', r')*(', processed)
+        
+        # Handle implicit multiplication between variable and parentheses like x(y+z) -> x*(y+z)
+        processed = re.sub(r'([a-zA-Z])\s*\(', r'\1*(', processed)
+        
+        # Handle implicit multiplication between parentheses and variable like (x+y)z -> (x+y)*z
+        processed = re.sub(r'\)\s*([a-zA-Z])', r')*\1', processed)
+        
+        return processed
     
     def _sympy_to_expression(self, sympy_expr) -> Expression:
         """Convert a SymPy expression to our Expression representation."""

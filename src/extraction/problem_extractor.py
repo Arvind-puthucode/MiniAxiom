@@ -156,6 +156,19 @@ Now process: {problem_text}
                 rule = self.parser.parse_rule(rule_str, f"extracted_rule_{i}")
                 rules.append(rule)
             except Exception as e:
+                # Check if this is actually a fact that was mislabeled as a rule
+                if "Invalid rule format" in str(e):
+                    try:
+                        # Try parsing as a fact
+                        fact = self.parser.parse_fact(rule_str)
+                        # Convert fact to a rule: fact → fact (identity rule)
+                        from ..formal.expressions import Rule
+                        identity_rule = Rule([fact], fact, f"identity_rule_{i}")
+                        rules.append(identity_rule)
+                        continue
+                    except:
+                        pass  # If fact parsing also fails, fall through to original error
+                
                 raise ValueError(f"Failed to parse rule '{rule_str}': {str(e)}")
         return rules
     
